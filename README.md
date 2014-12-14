@@ -8,6 +8,80 @@ Litaria RESTful API
 ![Progress](http://progressed.io/bar/1)  
 *If the progress-bar above is anything less than 100%, or if the build is failing, be wary of using this repo*.
 
+
+## Install the API
+
+```
+git clone --recursive git@github.com:Litaria/API.git litaria_api && cd litaria_api && npm install
+```
+
+## Configure the API
+``` 
+vi lib/config.js
+```
+* Edit the rate-limit settings
+* Edit the allowable-client-id settings
+* Edit the environment-specific settings for any environments you plan on deploying to (incuding localhost)
+  * Edit the base url for the API
+  * Edit the mongoDB connection settings
+  * Edit the Neo4j connection settings
+  * Edit the DynamoDB connection settings
+  * Edit the Redis connection settings
+  * Edit the RabbitMQ connection settings
+
+
+## Run the tests
+
+``` 
+npm start && npm test && npm stop
+```
+
+If any tests fail, review the relevant files. The most likely cause of failures is a failed connection to Mongo, Redis, Neo4j, DynamoDB, or RabbitMQ (in which case you should check your settings and make sure those applications are running and available). If any other issues present themselves, please report them (see below). 
+
+### *Tip*
+You can see more vebose output from the failed integration tests by editing app.js and changing api.config.log to *true*.
+
+
+## Deploy the API
+### localhost example:
+```
+npm start
+```
+
+### CENTOS example (VM over SSH)
+
+```
+screen
+cd {path-to-your-installation}
+NODE_ENV=production node ./bin/www
+[ctrl a d]
+```
+Note that the environment has been passed so that the application will run in production mode.
+
+
+## Consume the API
+There is a wiki attached the Github repo. This wiki explains the basics of connecting to the API, and overviews all the associated services. You can access the Wiki [here](https://github.com/litaria/API/wiki). 
+
+You can also consume the API by deploying a the Litaria web or mobile clients, available here:
+
+* [https://github.com/litaria/web-client](https://github.com/litaria/web-client)
+* [https://github.com/litaria/mobile-client](https://github.com/litaria/mobile-client)
+
+
+## Stop the API
+### localhost example:
+```
+npm stop
+```
+
+### CENTOS example (VM over SSH)
+
+```
+screen -r
+[ctrl c]
+[ctrl a d]
+```
+
 ## Contribute
 Fixed a bug? Added a feature? Feel free to [submit a pull request](https://help.github.com/articles/using-pull-requests). If you've added a feature please make sure your code is tested in some way (unit, component, integration, whatever). We're striving for 100% coverage via integration tests, 90% coverage via component tests, and 80% coverage via unit tests. You don't have to write all these tests yourself, but please do a significant amount.
 
