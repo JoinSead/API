@@ -112,7 +112,7 @@ gulp.task('tests-all', function (callback) {
 });
 
 // Serve via nodemon, reboot and re-run all tasks when changes occur
-gulp.task('nodemon', function () {
+gulp.task('watch', function () {
   nodemon({
     script: 'bin/www',
     ext: 'js',

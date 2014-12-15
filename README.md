@@ -83,7 +83,15 @@ screen -r
 ```
 
 ## Contribute
-Fixed a bug? Added a feature? Feel free to [submit a pull request](https://help.github.com/articles/using-pull-requests). If you've added a feature please make sure your code is tested in some way (unit, component, integration, whatever). We're striving for 100% coverage via integration tests, 90% coverage via component tests, and 80% coverage via unit tests. You don't have to write all these tests yourself, but please do a significant amount.
+
+Nodemon has been incorporated into Gulp to ease the development process. To activate Nodemon run:
+
+```
+gulp watch
+```
+This way, the test-suite will be re-run automatically after every change is made. 
+
+If you have fixed a bug, or added a feature please feel free to [submit a pull request](https://help.github.com/articles/using-pull-requests). If you've added a feature please make sure your code is tested in some way (unit, component, integration, whatever). We're striving for 100% coverage via integration tests, 90% coverage via component tests, and 80% coverage via unit tests. You don't have to write all these tests yourself, but please do a significant amount.
 
 ## Report Bugs / Request features
 Found a bug? Please report it in the [issues tab](https://github.com/Litaria/API/issues/new).
