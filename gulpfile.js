@@ -119,10 +119,5 @@ gulp.task('watch', function () {
 
 // Build defaults
 gulp.task('default', function (callback) {
-  runSequence(
-    'tests-lint',
-    'tests-unit',
-    'tests-component',
-    'tests-integration',
-    callback);
+  console.log('Please specify a gulp task');
 });
