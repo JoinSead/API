@@ -11,12 +11,7 @@
  */
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
-var del = require('del');
 var runSequence = require('run-sequence');
-var path = require('path');
-var replace = require('gulp-replace');
-var fs = require('fs');
-var rename = require('gulp-rename');
 var mocha = require('gulp-mocha');
 var nodemon = require('gulp-nodemon');
 var jshint = require('gulp-jshint');

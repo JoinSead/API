@@ -6,9 +6,12 @@
     "node" : ">=0.10.29 <0.12"
   },
   "scripts": {
+    "prestart" : "npm stop",
     "start": "node ./bin/www &",
-    "stop": "pkill -9 -f 'litariaapi'", 
-    "test": "gulp tests-all"
+    "stop": "pkill -9 -f 'litariaapi' || true", 
+    "pretest": "npm start",
+    "test": "gulp tests-all",
+    "posttest": "npm stop"
   },
   "dependencies": {
     "amqp" : "~0.2.0",
@@ -29,28 +32,16 @@
   "devDependencies": {
     "del": "^0.1.1",
     "gulp": "^3.8.5",
-    "gulp-autoprefixer": "^0.0.8",
-    "gulp-cache": "^0.2.0",
-    "gulp-changed": "^0.4.0",
-    "gulp-concat": "~2.3.3",
     "gulp-exit": "~0.0.2",
     "gulp-express": "~0.1.0",
-    "gulp-flatten": "^0.0.2",
     "gulp-if": "^1.2.1",
     "gulp-jshint": "^1.8.3",
     "gulp-load-plugins": "^0.5.3",
     "gulp-mocha" : "~0.5.2",
     "gulp-nodemon": "~1.0.4",
-    "gulp-rename": "~1.2.0",
-    "gulp-replace": "^0.3.0",
-    "gulp-size": "^0.4.0",
-    "gulp-useref": "^0.4.4",
     "jshint-stylish": "^0.2.0",
     "mocha": "~1.21.3",
     "nodemon" : "~1.2.1",
-    "opn": "^0.1.2",
-    "psi": "^0.0.4",
-    "require-dir": "^0.1.0",
     "run-sequence": "^0.3.6",
     "should": "~4.0.4",
     "supertest":"~0.13.0"
