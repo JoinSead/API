@@ -90,8 +90,7 @@ gulp.task('tests-integration', function () {
 
 // Kill the test process by piping to exit
 gulp.task('tests-kill', function () {
-  return gulp.src(['test/kill.js'], {read: false})
-  .pipe(exit());
+process.exit.bind(process, 1);
 });
 
 
