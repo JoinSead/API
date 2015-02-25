@@ -4,8 +4,13 @@ Litaria RESTful API
 > This is the RESTful API powering Litaria. The most recent stable version is deployed to api.litaria.com, while the most recent nightly build is deployed to api-staging.litaria.com.
 
 ## Current State / Progress
+
+
+[![Codeship Status for Litaria/API](https://codeship.com/projects/bb3c40b0-9ece-0132-bcf3-56e0c71a690d/status?branch=master)](https://codeship.com/projects/64958)
+
 ![build](https://travis-ci.org/Litaria/API.svg?branch=master)
-![Progress](http://progressed.io/bar/1)  
+
+![Progress](http://progressed.io/bar/4)  
 *If the progress-bar above is anything less than 100%, or if the build is failing, be wary of using this repo*.
 
 
