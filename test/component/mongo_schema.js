@@ -50,6 +50,24 @@ describe('schema:mongodb', function(){
 
     });
 
+    describe('relationships', function(){
+
+        it('Should create a relationships schema with particular characteristics', function(){
+            var tmp = require('./../../schema/mongodb/relationships');
+            tmp.should.have.property('_id');
+            tmp.should.have.property('user');
+            tmp.should.have.property('created');
+            tmp.should.have.property('type');
+        });
+
+        it('Should register a mongoose model named relationships', function(){
+            (function(){
+              model = mongoose.model('relationships');
+            }).should.not.throw();
+        });
+
+    });
+
     describe('flags', function(){
 
         it('Should create a flags schema with particular characteristics', function(){
