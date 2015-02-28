@@ -471,8 +471,8 @@ describe('schema:mongodb', function(){
         it('Should create an reviews schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/reviews');
             tmp.should.have.property('_id');
-            tmp.should.have.property('release_id');
-            tmp.should.have.property('project_id');
+            tmp.should.have.property('release');
+            tmp.should.have.property('project');
             tmp.should.have.property('created');
             tmp.should.have.property('user');
             tmp.should.have.property('rating');
