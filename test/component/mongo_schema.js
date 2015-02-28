@@ -490,17 +490,20 @@ describe('schema:mongodb', function(){
 
     describe('annotations', function(){
 
-        it('Should create an comments schema with particular characteristics', function(){
+        it('Should create an annotations schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/annotations');
             tmp.should.have.property('_id');
-            tmp.should.have.property('project_id');
-            tmp.should.have.property('release_id');
+            tmp.should.have.property('project');
+            tmp.should.have.property('release');
             tmp.should.have.property('position');
             tmp.should.have.property('title');
             tmp.should.have.property('content');
             tmp.should.have.property('is_public');
+            tmp.should.have.property('status');
             tmp.should.have.property('rewards');
             tmp.should.have.property('reactions');
+            tmp.should.have.property('comments');
+            tmp.should.have.property('created');
         });
 
         it('Should register a mongoose model named annotations', function(){
