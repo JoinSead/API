@@ -317,11 +317,12 @@ describe('schema:mongodb', function(){
         it('Should create an aliases schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/aliases');
             tmp.should.have.property('_id');
-            tmp.should.have.property('url');
+            tmp.should.have.property('uri');
             tmp.should.have.property('type');
             tmp.should.have.property('ref_id');
             tmp.should.have.property('creator_type');
             tmp.should.have.property('creator_ref_id');
+            tmp.should.have.property('created');
         });
 
         it('Should register a mongoose model named aliases', function(){
