@@ -425,7 +425,7 @@ describe('schema:mongodb', function(){
         it('Should create an chapters schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/chapters');
             tmp.should.have.property('_id');
-            tmp.should.have.property('project_id');
+            tmp.should.have.property('project');
             tmp.should.have.property('number');
             tmp.should.have.property('name');
             tmp.should.have.property('description');
