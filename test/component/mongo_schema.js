@@ -275,8 +275,7 @@ describe('schema:mongodb', function(){
             tmp.should.have.property('_id');
             tmp.should.have.property('name_first');
             tmp.should.have.property('name_last');
-            tmp.should.have.property('ipv4_addr');
-            tmp.should.have.property('created_timestamp');
+            tmp.should.have.property('created');
             tmp.should.have.property('billing_profiles');
             tmp.should.have.property('billing_recipients');
             tmp.should.have.property('transactions');
@@ -287,9 +286,9 @@ describe('schema:mongodb', function(){
             tmp.should.have.property('messages_received');
             tmp.should.have.property('terms_agreement_timestamp');
             tmp.should.have.property('location');
-            tmp.should.have.propertyByPath('locations','name');
-            tmp.should.have.propertyByPath('locations','address');
-            tmp.should.have.propertyByPath('locations','geo');
+            tmp.should.have.propertyByPath('location','name');
+            tmp.should.have.propertyByPath('location','address');
+            tmp.should.have.propertyByPath('location','geo');
             tmp.should.have.property('password_hash');
             tmp.should.have.property('email');
             tmp.should.have.propertyByPath('email','address');

@@ -1,5 +1,5 @@
 /*
- * Client Users
+ * Users
  *
  */
 
@@ -9,21 +9,6 @@ var Schema = mongoose.Schema;
 
 // Schema
 var new_schema = new Schema({
-	client_cookies : [{
-		type : String,
-		default : null
-	}],
-	ipv4_addr : {
-		type : String,
-		default : null
-	},
-	user_agent : {
-		type : String,
-		default : null
-	},
-	created_timestamp : {
-		type : Number
-	},
 	name_first : {
 		type: String,
 		default : null
@@ -32,12 +17,31 @@ var new_schema = new Schema({
 		type: String,
 		default : null
 	},
+	created : {
+		type : Number
+	},
 	terms_agreement_timestamp : {
 		type : Number
 	},
+	projects : [{
+		type: Schema.ObjectId,
+		ref: 'projects'
+	}],
+	library : [{
+		type: Schema.ObjectId,
+		ref: 'checkouts'
+	}],
+	transactions : [{
+		type: Schema.ObjectId,
+		ref: 'transactions'
+	}],
 	billing_profiles : [{
 		type: Schema.ObjectId,
 		ref: 'billing_profiles'
+	}],
+	billing_recipients : [{
+		type: Schema.ObjectId,
+		ref: 'billing_recipients'
 	}],
 	profile_images : [{
 		type: Schema.ObjectId,
@@ -49,7 +53,7 @@ var new_schema = new Schema({
 	}],
 	relationships : [{
 		type: Schema.ObjectId,
-		ref: 'relationship'
+		ref: 'relationships'
 	}],
 	messages_sent : [{
 		type: Schema.ObjectId,
