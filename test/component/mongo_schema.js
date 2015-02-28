@@ -454,7 +454,7 @@ describe('schema:mongodb', function(){
             tmp.should.have.property('created');
             tmp.should.have.property('save_type');
             tmp.should.have.property('note');
-            tmp.should.have.property('chapter_data');
+            tmp.should.have.property('content');
         });
 
         it('Should register a mongoose model named chapter_snapshots', function(){
@@ -542,12 +542,13 @@ describe('schema:mongodb', function(){
         it('Should create an releases schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/releases');
             tmp.should.have.property('_id');
-            tmp.should.have.property('semver_id');
+            tmp.should.have.property('version');
             tmp.should.have.property('project');
-            tmp.should.have.property('chapter_snapshot_ids');
+            tmp.should.have.property('chapter_snapshots');
             tmp.should.have.property('price');
             tmp.should.have.property('created');
             tmp.should.have.property('checkouts');
+            tmp.should.have.property('transactions');
             tmp.should.have.property('meta');
             tmp.should.have.property('content');
             tmp.should.have.property('annotations');

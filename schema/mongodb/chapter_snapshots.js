@@ -21,9 +21,8 @@ var new_schema = new Schema({
 		type: String,
 		default: null
 	},
-	chapter_data : {
-		type: String,
-		default: null
+	content : {
+		type : Schema.Types.Mixed
 	},
 	created : {
 		type : Number
