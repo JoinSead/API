@@ -14,24 +14,23 @@ var app  = require('./../app');
 var get_email = function(data){
     var email = {};
 
-    email.subject = 'Confirm your LimitX email address!';
+    email.subject = 'Confirm your email address!';
     var source = 'Hi {{name_first}},\n'
     +'\n'
-    +'Thank you for joining LimitX! \n'
-    +'Please take an instant to verify your email address in order to access all the features of LimitX by clicking on the link below:\n'
+    +'Thank you for joining! \n'
+    +'Please follow the link below to confirm your email address\n'
     +'\n'
-    +api.config.urls.www+'cp/confirm_email/{{email.confirmation_id}}\n'
+    +api.config.urls.www+'dashboard/confirm_email/{{email.confirmation_id}}\n'
     +'\n'
-    +'We are constantly adding new features and we are always happy to get your feedback and listen to your needs. Don’t hesitate to contact us at support@limitx.com for any questions you might have!\n'
     +'\n'
     +'Thanks again,\n'
-    +'The LimitX Team';
+    +api.config.site_name;
 
     var template = Handlebars.compile(source);
     email.text = template(data);
     email.sender = {
-        name : 'LimitX',
-        address : 'no-reply@limitx.com'
+        name : api.config.site_name,
+        address : api.config.mailgun.default_sender
     };
     email.from = email.sender.name+' <'+email.sender.address+'>',
     email.to = data.to;
