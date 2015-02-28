@@ -299,6 +299,7 @@ describe('schema:mongodb', function(){
             tmp.should.have.propertyByPath('email','reveal_to_connections');
             tmp.should.have.propertyByPath('email','mailing_list_subscribe');
             tmp.should.have.property('library');
+            tmp.should.have.property('checkouts');
             tmp.should.have.property('projects');
 
         });
@@ -359,26 +360,25 @@ describe('schema:mongodb', function(){
 
     });
 
-    describe('libraries', function(){
+    describe('library_items', function(){
 
-        it('Should create an libraries schema with particular characteristics', function(){
-            var tmp = require('./../../schema/mongodb/libraries');
+        it('Should create an library_items schema with particular characteristics', function(){
+            var tmp = require('./../../schema/mongodb/library_items');
             tmp.should.have.property('_id');
-            tmp.should.have.property('titles');
-            tmp.should.have.propertyByPath('titles',[0],'project_id');
-            tmp.should.have.propertyByPath('titles',[0],'release_id');
-            tmp.should.have.propertyByPath('titles',[0],'checkout_id');
-            tmp.should.have.propertyByPath('titles',[0],'transactions');
-            tmp.should.have.propertyByPath('titles',[0],'bookmarks');
-            tmp.should.have.propertyByPath('titles',[0],'annotations');
-            tmp.should.have.propertyByPath('titles',[0],'current_place');
-            tmp.should.have.propertyByPath('titles',[0],'has_finished_reading');
-            tmp.should.have.propertyByPath('titles',[0],'status');
+            tmp.should.have.property('project');
+            tmp.should.have.property('release');
+            tmp.should.have.property('checkout');
+            tmp.should.have.property('transactions');
+            tmp.should.have.property('bookmarks');
+            tmp.should.have.property('annotations');
+            tmp.should.have.property('place_marker');
+            tmp.should.have.property('has_finished');
+            tmp.should.have.property('status');
         });
 
-        it('Should register a mongoose model named aliases', function(){
+        it('Should register a mongoose model named library_items', function(){
             (function(){
-              model = mongoose.model('libraries');
+              model = mongoose.model('library_items');
             }).should.not.throw();
         });
 

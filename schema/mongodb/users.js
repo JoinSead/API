@@ -29,6 +29,10 @@ var new_schema = new Schema({
 	}],
 	library : [{
 		type: Schema.ObjectId,
+		ref: 'library_items'
+	}],
+	checkouts : [{
+		type: Schema.ObjectId,
 		ref: 'checkouts'
 	}],
 	transactions : [{
