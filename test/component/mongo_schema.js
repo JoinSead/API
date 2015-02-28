@@ -450,7 +450,7 @@ describe('schema:mongodb', function(){
         it('Should create an chapter_snapshots schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/chapter_snapshots');
             tmp.should.have.property('_id');
-            tmp.should.have.property('chapter_id');
+            tmp.should.have.property('chapter');
             tmp.should.have.property('created');
             tmp.should.have.property('save_type');
             tmp.should.have.property('note');
