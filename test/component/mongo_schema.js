@@ -298,7 +298,7 @@ describe('schema:mongodb', function(){
             tmp.should.have.propertyByPath('email','relay_messages');
             tmp.should.have.propertyByPath('email','reveal_to_connections');
             tmp.should.have.propertyByPath('email','mailing_list_subscribe');
-            tmp.should.have.property('library');
+            tmp.should.have.property('library_items');
             tmp.should.have.property('checkouts');
             tmp.should.have.property('projects');
 

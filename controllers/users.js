@@ -45,7 +45,7 @@ router.route('/')
 		var criteria = {
 			'email.address' : inputs.email,
 		};
-		model.users.get('client', criteria, undefined, function(user){
+		model.users.get(criteria, undefined, function(user){
 			if(user && user.length > 0 && !email_invalidated){
 				res.response_data.head.messages.errors.push({input : 'username'});
 				email_invalidated = true;
@@ -56,7 +56,7 @@ router.route('/')
 		  		api.errors._400(req, res, 'One or more of the inputs passed contained errors. See errors in head.');
 
 		  	} else {
-			  	// Try to create a client user
+			  	// Try to create a user
 			  	var first_name = inputs.full_name.substr(0,inputs.full_name.indexOf(' '));
 			  	var last_name = inputs.full_name.substr(inputs.full_name.indexOf(' ')+1);
 				var dataset = {
@@ -69,11 +69,11 @@ router.route('/')
 				if(has_password){
 					dataset.password_hash = inputs.password;
 				}
-				model.users.client.post(dataset, function(user_data){
+				model.users.post(dataset, function(user_data){
 					if(user_data){
 						// Create a token for this new user
 						var dataset = {
-							user_type : 'client',
+							user_type : 'user',
 							user_id : user_data._id
 						};
 						model.auth.tokens.post(dataset, req, function(token_data){
@@ -90,7 +90,7 @@ router.route('/')
 								if(typeof(has_password) !== 'undefined'){
 									var email_data = user_data;
 									email_data.to = user_data.email.address;
-									var mail_obj = require('./../email/welcome_client')(email_data);
+									var mail_obj = require('./../email/welcome_user')(email_data);
 
 									// Send to mail queue
 									rabbitmq_client.publish('outgoing_mail_queue', mail_obj);
@@ -112,14 +112,14 @@ router.route('/')
 		var criteria = {
 			'_id' : req.query._id,
 		};
-		model.users.client.get(criteria, undefined, function(data){
+		model.users.get(criteria, undefined, function(data){
 			if(data && data.length > 0){
 				data = data[0];
 				var payload = data;
 				// Augment payload based on passed token
 				var user_type = res.response_data.head.credentials.access_token.user_type;
 				var user_id = res.response_data.head.credentials.access_token.user_id; 
-				if((user_type == 'client' && user_id == req.query._id)|| user_type == 'admin'){
+				if((user_type == 'user' && user_id == req.query._id)|| user_type == 'admin'){
 					payload.password_hash = undefined;
 				} else {
 					payload.email = undefined;
@@ -141,7 +141,7 @@ router.route('/')
 	})
 	.put(function(req, res, next) {
 	  	// Should be restricted to valid admin tokens and the user themself
-		api.utilities.permissions.restrict_to_type_or_self(req, res, ['admin'], 'client', req.body._id, function(cont){
+		api.utilities.permissions.restrict_to_type_or_self(req, res, ['admin'], 'user', req.body._id, function(cont){
 			if(cont){
 			  	// Grab inputs
 			  	var _id = typeof(req.body._id) !== 'undefined' ? req.body._id : null;
@@ -200,12 +200,12 @@ router.route('/')
 								criteria['email.confirmation_id'] = typeof(advanced_filters.email.confirmation_id) !== 'undefined' ? advanced_filters.email.confirmation_id : null;
 								criteria['email.is_confirmed'] = false;
 							}
-							model.users.client.get(criteria, undefined, function(user){
+							model.users.get(criteria, undefined, function(user){
 								if(user && user.length > 0 ){
 								  	// Try to update a user
 								  	var saved_data = user[0];
 									var dataset = inputs;
-									model.users.client.put(_id, dataset, function(user_data){
+									model.users.put(_id, dataset, function(user_data){
 										if(user_data){
 											// Return the user data
 											var payload = user_data;
@@ -214,7 +214,7 @@ router.route('/')
 											// Compile confirm-email message
 											var email_data = user_data;
 											email_data.to = user_data.email.address;
-											var mail_obj = require('./../email/confirm_email_client')(email_data);
+											var mail_obj = require('./../email/confirm_email_user')(email_data);
 
 											// Send to mail queue
 											rabbitmq_client.publish('outgoing_mail_queue', mail_obj);
@@ -240,7 +240,7 @@ router.route('/')
 						criteria = {
 							'_id' : _id,
 						};
-						model.users.client.get(criteria, undefined, function(user){
+						model.users.get(criteria, undefined, function(user){
 							if(user && user.length > 0 ){
 							  	// Try to update a user
 							  	var saved_data = user[0];
@@ -248,7 +248,7 @@ router.route('/')
 								var dataset = inputs;
 								var email_data = null;
 								var mail_obj = null;
-								model.users.client.put(_id, dataset, function(user_data){
+								model.users.put(_id, dataset, function(user_data){
 									if(user_data){
 
 										// If user updated password, send conf email or welcome email
@@ -256,14 +256,14 @@ router.route('/')
 											if(existing_password === null){
 												email_data = user_data;
 												email_data.to = user_data.email.address;
-												mail_obj = require('./../email/welcome_client')(email_data);
+												mail_obj = require('./../email/welcome_user')(email_data);
 
 												// Send to mail queue
 												rabbitmq_client.publish('outgoing_mail_queue', mail_obj);
 											} else {
 												email_data = user_data;
 												email_data.to = user_data.email.address;
-												mail_obj = require('./../email/password_changed_client')(email_data);
+												mail_obj = require('./../email/password_changed_user')(email_data);
 
 												// Send to mail queue
 												rabbitmq_client.publish('outgoing_mail_queue', mail_obj);						
@@ -289,7 +289,7 @@ router.route('/')
 	})
 	.delete(function(req, res, next) {
 	  	// Should be restricted to valid admin tokens and the user themself
-		api.utilities.permissions.restrict_to_type_or_self(req, res, ['admin'], 'client', req.body._id, function(cont){
+		api.utilities.permissions.restrict_to_type_or_self(req, res, ['admin'], 'user', req.body._id, function(cont){
 			if(cont){
 			  	// Grab inputs
 			  	var _id = typeof(req.body._id) !== 'undefined' ? req.body._id : null;
@@ -307,7 +307,7 @@ router.route('/')
 			  	}
 
 			  	// Only check form inputs if the request comes from the user in question
-			  	if(user_type == 'client'){
+			  	if(user_type == 'user'){
 				  	if(typeof(ramification_1) === 'undefined' || !ramification_1 || ramification_1 == 'false'){
 				  		res.response_data.head.messages.errors.push({input : 'ramification_1'});
 				  	}
@@ -330,7 +330,7 @@ router.route('/')
 						'_id' : _id,
 						'password_hash' : password_hash
 					};
-					model.users.client.get(criteria, undefined, function(data){
+					model.users.get(criteria, undefined, function(data){
 						if(!data || data.length === 0){
 							res.response_data.head.messages.errors.push({input : 'password'});
 						}
@@ -339,7 +339,7 @@ router.route('/')
 					  		api.errors._400(req, res, 'One or more of the inputs passed contained errors. See errors in head.');
 					  	} else {
 							// Delete user
-							model.users.client.delete({'_id' : _id}, function(outcome){
+							model.users.delete({'_id' : _id}, function(outcome){
 								if(outcome){
 									api.success._200(req, res);
 								} else {
@@ -354,7 +354,7 @@ router.route('/')
 				  		api.errors._400(req, res, 'One or more of the inputs passed contained errors. See errors in head.');
 				  	} else {
 						// Delete user
-						model.users.client.delete({'_id' : _id}, function(outcome){
+						model.users.delete({'_id' : _id}, function(outcome){
 							if(outcome){
 								api.success._200(req, res);
 							} else {

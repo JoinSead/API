@@ -27,7 +27,7 @@ var new_schema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'projects'
 	}],
-	library : [{
+	library_items : [{
 		type: Schema.ObjectId,
 		ref: 'library_items'
 	}],
