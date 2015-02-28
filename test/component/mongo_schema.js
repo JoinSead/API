@@ -244,7 +244,7 @@ describe('schema:mongodb', function(){
 
     describe('admins', function(){
 
-        it('Should create a users_admin schema with particular characteristics', function(){
+        it('Should create an admins schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/admins');
             tmp.should.have.property('_id');
             tmp.should.have.property('name_last');
@@ -260,9 +260,9 @@ describe('schema:mongodb', function(){
             tmp.should.have.property('messages_sent');
         });
 
-        it('Should register a mongoose model named users_admin', function(){
+        it('Should register a mongoose model named admins', function(){
             (function(){
-              model = mongoose.model('users_admin');
+              model = mongoose.model('admins');
             }).should.not.throw();
         });
 
@@ -304,9 +304,9 @@ describe('schema:mongodb', function(){
 
         });
 
-        it('Should register a mongoose model named users_client', function(){
+        it('Should register a mongoose model named users', function(){
             (function(){
-              model = mongoose.model('users_client');
+              model = mongoose.model('users');
             }).should.not.throw();
         });
 
