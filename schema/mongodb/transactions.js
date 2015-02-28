@@ -17,30 +17,28 @@ var new_schema = new Schema({
 		type : String,
 		default : null
 	},
-	user_type : {
-		type: String,
-		default: null
-	},
-	user_ref_id : {
-		type : String,
-		default : null
-	},
-	item_price : {
-		type : Number,
-		default : 0
-	},
-	item_quantity : {
-		type : Number,
-		default : 0
-	},
-	item_name : {
-		type : String,
-		default : null
-	},
-	item_description : {
-		type : String,
-		default : null
-	},
+	user : [{
+		type: Schema.ObjectId,
+		ref: 'users'
+	}],
+	items : [{
+		price : {
+			type : Number,
+			default : 0
+		},
+		quantity : {
+			type : Number,
+			default : 0
+		},
+		name : {
+			type : String,
+			default : null
+		},
+		description : {
+			type : String,
+			default : null
+		}
+	}],
 	service_percent : {
 		type : Number,
 		default : 0
@@ -85,10 +83,6 @@ var new_schema = new Schema({
 	billing_recipient : {
 		type: Schema.ObjectId,
 		ref: 'billing_recipient'
-	},
-	recipient_fee : {
-		type : Number,
-		default : 0
 	},
 	invoice_id : {
 		type: String,

@@ -98,7 +98,7 @@ describe('schema:mongodb', function(){
         it('Should create a images schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/images');
             tmp.should.have.property('_id');
-            tmp.should.have.property('user_id');
+            tmp.should.have.property('user');
             tmp.should.have.property('purpose_type');
             tmp.should.have.property('purpose_ref_id');
             tmp.should.have.property('created');
@@ -211,11 +211,13 @@ describe('schema:mongodb', function(){
             var tmp = require('./../../schema/mongodb/transactions');
             tmp.should.have.property('_id');
             tmp.should.have.property('type');
-            tmp.should.have.property('user_id');
-            tmp.should.have.property('item_price');
-            tmp.should.have.property('item_quantity');
-            tmp.should.have.property('item_name');
-            tmp.should.have.property('item_description');
+            tmp.should.have.property('ref_id');
+            tmp.should.have.property('user');
+            tmp.should.have.property('items');
+            tmp.should.have.propertyByPath('items','name');
+            tmp.should.have.propertyByPath('items','description');
+            tmp.should.have.propertyByPath('items','quantity');
+            tmp.should.have.propertyByPath('items','price');
             tmp.should.have.property('service_percent');
             tmp.should.have.property('convenience_fee');
             tmp.should.have.property('subtotal');

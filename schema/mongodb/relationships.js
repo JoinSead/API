@@ -9,26 +9,18 @@ var Schema = mongoose.Schema;
 
 // Schema
 var new_schema = new Schema({
-	user_type : {
-		type: String,
+	user : [{
+		type: Schema.ObjectId,
+		ref: 'users'
+	}],
+	created : {
+		type: Number,
 		default: null
 	},
-	ref_id : {
+	type : {
 		type: String,
 		default: null
-	},
-	users_pro : [{
-		type: Schema.ObjectId,
-		ref: 'users_pro'
-	}],
-	users_client : [{
-		type: Schema.ObjectId,
-		ref: 'users_client'
-	}],
-	users_admin : [{
-		type: Schema.ObjectId,
-		ref: 'users_admin'
-	}]
+	}
 });
 
 // Save
