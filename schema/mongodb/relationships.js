@@ -9,10 +9,10 @@ var Schema = mongoose.Schema;
 
 // Schema
 var new_schema = new Schema({
-	user : [{
+	user : {
 		type: Schema.ObjectId,
 		ref: 'users'
-	}],
+	},
 	created : {
 		type: Number,
 		default: null

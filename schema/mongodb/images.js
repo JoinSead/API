@@ -10,10 +10,10 @@ var Schema = mongoose.Schema;
 
 // Schema
 var new_schema = new Schema({
-	user : [{
+	user : {
 		type: Schema.ObjectId,
 		ref: 'users'
-	}],
+	},
 	purpose_type : {
 		type: String,
 		default: null

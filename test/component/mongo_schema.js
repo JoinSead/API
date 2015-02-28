@@ -347,11 +347,11 @@ describe('schema:mongodb', function(){
             tmp.should.have.propertyByPath('source','url');
             tmp.should.have.property('status');
             tmp.should.have.property('text');
-            tmp.should.have.property('book');
+            tmp.should.have.property('project');
 
         });
 
-        it('Should register a mongoose model named aliases', function(){
+        it('Should register a mongoose model named imported_titles', function(){
             (function(){
               model = mongoose.model('imported_titles');
             }).should.not.throw();

@@ -17,10 +17,10 @@ var new_schema = new Schema({
 		type : String,
 		default : null
 	},
-	user : [{
+	user : {
 		type: Schema.ObjectId,
 		ref: 'users'
-	}],
+	},
 	items : [{
 		price : {
 			type : Number,
