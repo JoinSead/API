@@ -570,16 +570,16 @@ describe('schema:mongodb', function(){
         it('Should create an checkouts schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/checkouts');
             tmp.should.have.property('_id');
-            tmp.should.have.property('release_id');
+            tmp.should.have.property('release');
             tmp.should.have.property('user');
             tmp.should.have.property('created');
             tmp.should.have.property('status');
-            tmp.should.have.property('library_id');
+            tmp.should.have.property('library_item');
             tmp.should.have.property('transactions');
 
         });
 
-        it('Should register a mongoose model named aliases', function(){
+        it('Should register a mongoose model named checkouts', function(){
             (function(){
               model = mongoose.model('checkouts');
             }).should.not.throw();
