@@ -214,10 +214,10 @@ describe('schema:mongodb', function(){
             tmp.should.have.property('ref_id');
             tmp.should.have.property('user');
             tmp.should.have.property('items');
-            tmp.should.have.propertyByPath('items','name');
-            tmp.should.have.propertyByPath('items','description');
-            tmp.should.have.propertyByPath('items','quantity');
-            tmp.should.have.propertyByPath('items','price');
+            tmp.should.have.propertyByPath('items',[0],'name');
+            tmp.should.have.propertyByPath('items',[0],'description');
+            tmp.should.have.propertyByPath('items',[0],'quantity');
+            tmp.should.have.propertyByPath('items',[0],'price');
             tmp.should.have.property('service_percent');
             tmp.should.have.property('convenience_fee');
             tmp.should.have.property('subtotal');
