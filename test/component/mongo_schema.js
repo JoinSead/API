@@ -519,11 +519,11 @@ describe('schema:mongodb', function(){
         it('Should create an comments schema with particular characteristics', function(){
             var tmp = require('./../../schema/mongodb/comments');
             tmp.should.have.property('_id');
-            tmp.should.have.property('annotation_id');
+            tmp.should.have.property('annotation');
             tmp.should.have.property('created');
-            tmp.should.have.property('in_reply_to_comment_id');
             tmp.should.have.property('title');
             tmp.should.have.property('content');
+            tmp.should.have.property('comments');
             tmp.should.have.property('rewards');
             tmp.should.have.property('reactions');
         });
