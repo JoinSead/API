@@ -18,7 +18,7 @@ var rabbitmq = require('amqp');
 var app = express();
 
 // Set the process
-process.title = 'litariaapi';
+process.title = 'seadapi';
 
 // App level settings
 app.enable('trust proxy');
