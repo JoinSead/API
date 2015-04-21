@@ -47,7 +47,6 @@ The private key should used be ignored by git. But always double check to be sur
 
 ```
 git ls-files --others --exclude-standard
-
 ```
 
 Then review the output to make sure that your private key is not being tracked by git. Your private key should **not** be listed when you run that command. If it **is** listed, that's a problem. Review the instructions above and make sure you've named it correctly and placed it in the correct directory. Do not commit or push if your private key is being added to the repository.
@@ -58,7 +57,6 @@ To encrypt a sensitive string (with the public key), save the string in a standa
 
 ```
 gulp encrypt --in 'devops/unencrypted_files/input.txt' --out 'devops/encrypted_files/output.txt' 
-
 ```
 To decrypt a string and use them during code execution, follow the examples in the config.js file (under the production and staging switches). You will need to import the private key (see above) in order to decrypt.
 
@@ -73,7 +71,7 @@ npm start && npm test && npm stop
 If any tests fail, review the relevant files. The most likely cause of failures is a failed connection to Mongo, Redis, Neo4j, DynamoDB, or RabbitMQ (in which case you should check your settings and make sure those applications are running and available). If any other issues present themselves, please report them (see below). 
 
 ### *Tip*
-You can see more vebose output from the failed integration tests by editing app.js and changing api.config.log to *true*.
+You can see more verbose output from the failed integration tests by editing lib/config.js and changing config.log to *true*.
 
 
 ## Deploy the API

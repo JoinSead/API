@@ -31,28 +31,22 @@ build/Release
 ############
 node_modules
 
-
 # Dist directory
 ############
 dist/*
 
-
 # Tmp files
 ############
 tmp/*.tmp
-
 
 # Sensitive devops files
 ############
 devops/keys/privkey.pem
 devops/unencrypted_files/*
 
-
-
 # Users Environment Variables
 ############
 .lock-wscript
-
 
 # Packages #
 ############
@@ -64,7 +58,6 @@ devops/unencrypted_files/*
 *.rar
 *.tar
 *.zip
-
 
 # OS generated files #
 ######################
