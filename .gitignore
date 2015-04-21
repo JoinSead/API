@@ -42,6 +42,12 @@ dist/*
 tmp/*.tmp
 
 
+# Sensitive devops files
+############
+devops/keys/privkey.pem
+devops/unencrypted_files/*
+
+
 
 # Users Environment Variables
 ############

@@ -4,15 +4,15 @@
  */
 
 // Dependencies
-var express = require('express');
-var compression = require('compression');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var redis = require('redis');
-var fs = require('fs');
-var rabbitmq = require('amqp');
+var express = require('express'),
+    compression = require('compression'),
+    path = require('path'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    mongoose = require('mongoose'),
+    redis = require('redis'),
+    fs = require('fs'),
+    rabbitmq = require('amqp');
 
 // Define the application
 var app = express();

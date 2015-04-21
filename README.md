@@ -1,38 +1,67 @@
-Litaria RESTful API
+Sead RESTful API
 =============
 
-> This is the RESTful API powering Litaria. The most recent stable version is deployed to api.litaria.com, while the most recent nightly build is deployed to api-staging.litaria.com.
+> This is the RESTful API powering Sead. The most recent stable version is deployed to api.sead.io, while the most recent passing commit is deployed to staging-api.sead.io.
+
 
 ## Current State / Progress
 
 
-[![Codeship Status for Litaria/API](https://codeship.com/projects/bb3c40b0-9ece-0132-bcf3-56e0c71a690d/status?branch=master)](https://codeship.com/projects/64958)
+[ ![Codeship Status for JoinSead/API](https://codeship.com/projects/bb3c40b0-9ece-0132-bcf3-56e0c71a690d/status?branch=master)](https://codeship.com/projects/64958)
 
-![build](https://travis-ci.org/Litaria/API.svg?branch=master)
+![build](https://travis-ci.org/JoinSead/API.svg?branch=master)
 
-![Progress](http://progressed.io/bar/4)  
+![Progress](http://progressed.io/bar/15)  
 *If the progress-bar above is anything less than 100%, or if the build is failing, be wary of using this repo*.
 
 
 ## Install the API
 
 ```
-git clone --recursive git@github.com:Litaria/API.git litaria_api && cd litaria_api && npm install
+git clone --recursive git@github.com:JoinSead/API.git sead_api && cd sead_api && npm install
 ```
 
 ## Configure the API
 ``` 
 vi lib/config.js
 ```
-* Edit the rate-limit settings
-* Edit the allowable-client-id settings
-* Edit the environment-specific settings for any environments you plan on deploying to (incuding localhost)
-  * Edit the base url for the API
-  * Edit the mongoDB connection settings
-  * Edit the Neo4j connection settings
-  * Edit the DynamoDB connection settings
-  * Edit the Redis connection settings
-  * Edit the RabbitMQ connection settings
+The /lib/config.js file contains the vast majority of the  configuration parameters. By editing that file you adjust settings for: 
+
+* MongoDB
+* Redis
+* RabbitMQ
+* AWS
+* Mailgun
+* Stripe
+
+As well other services and key settings such as the site name, the default url, the client-keys, and many others.
+
+The file is separated into an environment-based switch (to separate the settings for localhost, lan, staging, and production environments). The localhost settings should get you up and running locally, assuming you're running mongo, redis and rabbitmq services on your localhost as well.
+
+### Optional: Import your private key
+The Sead private key is not part of this repository by default. It is used **only** on the production and staging servers. (To decrypt sensitive strings needed within the "production" and "staging" parts of the config.js file). It is **not** necessary for a successful localhost deployment. 
+
+If you have access to the private key, add it (as privkey.pem) to the devops/keys directory before deploying to the staging or production servers.
+
+The private key should used be ignored by git. But always double check to be sure before commiting. Run a command like below:
+
+```
+git ls-files --others --exclude-standard
+
+```
+
+Then review the output to make sure that your private key is not being tracked by git. Your private key should **not** be listed when you run that command. If it **is** listed, that's a problem. Review the instructions above and make sure you've named it correctly and placed it in the correct directory. Do not commit or push if your private key is being added to the repository.
+
+### Sidenote: Encrypting and decrypting sensitive strings
+
+To encrypt a sensitive string (with the public key), save the string in a standalone file, and then run a command like this one:
+
+```
+gulp encrypt --in 'devops/unencrypted_files/input.txt' --out 'devops/encrypted_files/output.txt' 
+
+```
+To decrypt a string and use them during code execution, follow the examples in the config.js file (under the production and staging switches). You will need to import the private key (see above) in order to decrypt.
+
 
 
 ## Run the tests
@@ -65,12 +94,12 @@ Note that the environment has been passed so that the application will run in pr
 
 
 ## Consume the API
-There is a wiki attached the Github repo. This wiki explains the basics of connecting to the API, and overviews all the associated services. You can access the Wiki [here](https://github.com/litaria/API/wiki). 
+There is a wiki attached the Github repo. This wiki explains the basics of connecting to the API, and overviews all the associated services. You can access the Wiki [here](https://github.com/JoinSead/API/wiki). 
 
-You can also consume the API by deploying a the Litaria web or mobile clients, available here:
+You can also consume the API by deploying the Sead web or mobile clients, available here:
 
-* [https://github.com/litaria/web-client](https://github.com/litaria/web-client)
-* [https://github.com/litaria/mobile-client](https://github.com/litaria/mobile-client)
+* [https://github.com/JoinSead/web-client](https://github.com/JoinSead/web-client)
+* [https://github.com/JoinSead/mobile-client](https://github.com/JoinSead/mobile-client)
 
 
 ## Stop the API
@@ -99,12 +128,12 @@ This way, the test-suite will be re-run automatically after every change is made
 If you have fixed a bug, or added a feature please feel free to [submit a pull request](https://help.github.com/articles/using-pull-requests). If you've added a feature please make sure your code is tested in some way (unit, component, integration, whatever). We're striving for 100% coverage via integration tests, 90% coverage via component tests, and 80% coverage via unit tests. You don't have to write all these tests yourself, but please do a significant amount.
 
 ## Report Bugs / Request features
-Found a bug? Please report it in the [issues tab](https://github.com/Litaria/API/issues/new).
+Found a bug? Please report it in the [issues tab](https://github.com/JoinSead/API/issues/new).
 
 If there's a new feature you want you can either:
 
 * Create an issue (see above) and label it accordingly
-* Send an email to austin@litaria.com
+* Send an email to a@sead.io
 * Starting building it yourself (see contribution-guidelines below).
 
 ## License

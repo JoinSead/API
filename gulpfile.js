@@ -9,13 +9,33 @@
  * Dependencies
  *
  */
-var gulp = require('gulp');
-var $ = require('gulp-load-plugins')();
-var runSequence = require('run-sequence');
-var mocha = require('gulp-mocha');
-var nodemon = require('gulp-nodemon');
-var jshint = require('gulp-jshint');
-var exit = require('gulp-exit');
+var gulp = require('gulp'),
+  $ = require('gulp-load-plugins')(),
+  runSequence = require('run-sequence'),
+  mocha = require('gulp-mocha'),
+  nodemon = require('gulp-nodemon'),
+  jshint = require('gulp-jshint'),
+  exit = require('gulp-exit'),
+  fs = require('fs'),
+  ursa = require('ursa'),
+  argv = require('yargs').argv;
+
+
+
+// Encrypt files
+gulp.task('encrypt', function (callback) { 
+    var input_file = typeof(argv.in) !== 'undefined' && argv.in ? argv.in : false;
+    var output_file = typeof(argv.out) !== 'undefined' && argv.out ? argv.out : false;
+    if(input_file && output_file){
+      var input_data = fs.readFileSync(input_file, 'utf8').trim();
+      var public_key = ursa.createPublicKey(fs.readFileSync('devops/keys/pubkey.pem'));
+      var encrypted_data = public_key.encrypt(input_data, 'utf8', 'base64');
+      fs.writeFileSync(output_file, encrypted_data);
+    } else {
+      console.log('Missing input or output file parameters');
+    }
+     
+});
 
 
 // Lint the application code
