@@ -9,8 +9,6 @@ Sead RESTful API
 
 [ ![Codeship Status for JoinSead/API](https://codeship.com/projects/bb3c40b0-9ece-0132-bcf3-56e0c71a690d/status?branch=master)](https://codeship.com/projects/64958)
 
-![build](https://travis-ci.org/JoinSead/API.svg?branch=master)
-
 ![Progress](http://progressed.io/bar/15)  
 *If the progress-bar above is anything less than 100%, or if the build is failing, be wary of using this repo*.
 
